@@ -31,12 +31,12 @@ export class PlanetComposable {
     this.moveAlgorithm = moveAlgorithm;
   }
   move() {
-    if(this.moveAlgorithm) {
-        this.moveAlgorithm.move(this.position, this.offset);
+    if (this.moveAlgorithm) {
+      this.moveAlgorithm.move(this.position, this.offset);
     }
   }
   render(ctx) {
-    if(this.renderAlgorithm) {
+    if (this.renderAlgorithm) {
       this.renderAlgorithm.render(ctx, this.position);
     }
   }
@@ -56,7 +56,6 @@ export class RotatedPlanet extends Planet {
     this.alpha = 0;
     this.speed = speed;
   }
-
   rotate() {
     this.alpha += this.speed / Math.PI;
     this.position.x = this.radius * Math.sin(this.alpha) + this.center.x;
@@ -69,7 +68,6 @@ export class Earth extends RotatedPlanet {
   constructor(center, radius) {
     super('green', 'blue', 40, center, radius, 0.03);
   }
-
   render(ctx) {
     super.render(ctx);
     ctx.fillStyle = 'blue';
@@ -80,23 +78,23 @@ export class Earth extends RotatedPlanet {
 }
 
 export class Mars extends RotatedPlanet {
-   constructor(center, radius) {
-     super('lightsalmon', 'pink', 20, center, radius, 0.05);
-   }
-   render(ctx) {
-     super.render(ctx);
-     ctx.fillStyle = 'red';
-     ctx.beginPath();
-     ctx.arc(this.position.x - 10, this.position.y, this.size / 2, 0, 2 * Math.PI);
-     ctx.fill();
-   }
- }
+  constructor(center, radius) {
+    super('lightsalmon', 'palevioletred', 20, center, radius, 0.05);
+  }
+  render(ctx) {
+    super.render(ctx);
+    ctx.fillStyle = 'red';
+    ctx.beginPath();
+    ctx.arc(this.position.x - 5, this.position.y, this.size / 2, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+}
 
 export class Moon extends RotatedPlanet {
-   constructor(center, radius) {
-     super('yellow', 'gray', 5, center, radius, 0.1);
-   }
-   render(ctx) {
-     super.render(ctx);
-   }
- }
+  constructor(center, radius) {
+    super('gray', 'palevioletred', 5, center, radius, -0.1);
+  }
+  render(ctx) {
+    super.render(ctx);
+  }
+}
