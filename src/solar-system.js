@@ -23,6 +23,25 @@ export class Planet {
   }
 }
 
+export class PlanetComposable {
+  constructor(position, renderAlgorithm, moveAlgorithm) {
+    this.position = position;
+    this.offset = new Position(0, 0);
+    this.renderAlgorithm = renderAlgorithm;
+    this.moveAlgorithm = moveAlgorithm;
+  }
+  move() {
+    if(this.moveAlgorithm) {
+        this.moveAlgorithm.move(this.position, this.offset);
+    }
+  }
+  render(ctx) {
+    if(this.renderAlgorithm) {
+      this.renderAlgorithm.render(ctx, this.position);
+    }
+  }
+}
+
 export class Sun extends Planet {
   constructor(position) {
     super('red', 'yellow', position, 100);
