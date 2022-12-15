@@ -15,9 +15,14 @@ const express = require('express');
 const fs = require('node:fs/promises');
 const app = express();
 
+async function saveDB() {
+    await fs.writeFile('./db.json', JSON.stringify(db));
+}
+
 process.on("exit", () => {
     console.log("Goodbay Node");
 })
+
 app.use('/site', express.static('public'))
 
 app.get('/', (req, res) => {
@@ -54,7 +59,7 @@ app.post('/users', async (req, res) => {
     const userData = req.body;
     console.log(userData);
     db.users.push({ id: db.users.length , ...userData });
-    await fs.writeFile('./db.json', JSON.stringify(db));
+    saveDB();
     res.status(200).json(db.users);
 });
 
@@ -79,6 +84,14 @@ app.use((req, res, next) => {
 let db;
 
 app.listen(process.env.PORT || 3000, async () => {
-    db = JSON.parse(await fs.readFile('./db.json', 'utf8'));
+    try {
+        db = JSON.parse(await fs.readFile('./db.json', 'utf8'));
+    } catch (e) {
+        db = {
+            users: []
+        };
+        saveDB();
+    }
+
     console.log(`Example app listening on port ${process.env.PORT}`, db)
 });
