@@ -1,0 +1,71 @@
+vds.timeweb.ru
+
+-зайти на ресурс
+-созадть облачный сервер
+- после создания он появится в "общий проект"
+- логин и пароль придут на почту, указанную при регистрации на ресурсе
+- скопировать ip4
+- из cmd выполнить
+C:\Users\Acer>ssh root@90.156.224.66
+
+- если выбрали debian, то установки выполнять для debian
+(разрешать: Do you want to continue? [Y/n] Y)
+> apt-get install -y nodejs
+установить nvm
+> wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+можно установить curl
+>apt install curl
+нужно перейти в
+> source .bashrc
+посмотреть версию nvm
+>  nvm --version
+Посмотреть файлы
+> ls
+Посмотерть скрытые файлы
+> ls -a
+
+далее выполнить
+> nano .bashrc
+и установить нужную версию nvm
+> nvm install 16
+посмотреть версии nvm
+> nvm list
+перейти на нужную версию nvm
+> nvm use 16
+Устанавливаем pm2
+> npm install -g pm2
+выполнить
+> pm2 list
+и
+> pm2 logs
+Чтобы прервать ctrl+C
+ЗАГРУЗИТЬ проект из репо (~GITHUB)
+>  git clone <полный http репо> ./server
+./server --- это название директории, в которую склонируется проект
+теперь войти в директорию проекта
+> cd server
+и зачикиниться на нужную ветку
+> git checkout <имя ветки>
+> git pull
+?? не поняла, зачем здесь следующее (может не надо)
+> nano package.json
+выйти в рут
+> cd ~
+//поменять порт , на котором будет запуск
+> nano .bashrc
+> Y
+с помощью стрелок перехода в новой строке ввести
+export PORT=3003 и нажать enter
+выйти из .bashrc с помощью ctrl+X
+перейти в
+>  cd server
+
+выполнить последовательно
+> npm install
+ nano package.json
+ npm run dev
+ npm run pm2 logs
+
+ Открыть адрес ip в браузере и любоваться
+
+ Не забыть остановить сервер после работы.
