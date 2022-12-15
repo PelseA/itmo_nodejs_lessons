@@ -1,5 +1,0 @@
-не использовать setInterval в качестве ф-ий для рендеринга анимаций
-использовать requestAnimationFrame callbacks
-window.requestAnimationFrame(someRender)
-
-
