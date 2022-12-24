@@ -6,7 +6,7 @@ vds.timeweb.ru
 - логин и пароль придут на почту, указанную при регистрации на ресурсе
 - скопировать ip4
 - из cmd выполнить
-C:\Users\Acer>ssh root@90.156.224.66
+C:\Users\Acer>ssh root@90.156.224.66  , где 90.156.224.66 - ip
 
 - если выбрали debian, то установки выполнять для debian
 (разрешать: Do you want to continue? [Y/n] Y)
@@ -40,32 +40,40 @@ C:\Users\Acer>ssh root@90.156.224.66
 > pm2 logs
 Чтобы прервать ctrl+C
 ЗАГРУЗИТЬ проект из репо (~GITHUB)
->  git clone <полный http репо> ./server
+>  git clone <полный http репо без угловых скобок> ./server
+пример: >  git clone https://github.com/PelseA/itmo_nodejs_lessons ./server
 ./server --- это название директории, в которую склонируется проект
+(можно склонировать свой репозиторий сразу создавая удаленный репо на сервере, нужно
+уточнять, так как на занятии что-то пошло не так:
+ git clone --bare --shared https://github.com/PelseA/itmo_nodejs_lessons ./server)
 теперь войти в директорию проекта
 > cd server
 и зачикиниться на нужную ветку
 > git checkout <имя ветки>
 > git pull
 ?? не поняла, зачем здесь следующее (может не надо)
-> nano package.json
+> nano package.json (выйти отсюда ctrl+X)
 выйти в рут
 > cd ~
+посмотреть текущую директорию
+> pwd
 //поменять порт , на котором будет запуск
 > nano .bashrc
 > Y
 с помощью стрелок перехода в новой строке ввести
 export PORT=3003 и нажать enter
+//если добавлять действия с установкой порта в .bashrc,
+//то команда в bash скрипте: echo export PORT=3003 >> .bashrc
 выйти из .bashrc с помощью ctrl+X
 перейти в
->  cd server
+> cd server
 
 выполнить последовательно
 > npm install
- nano package.json
+ //nano package.json
  npm run dev
  npm run pm2 logs
 
- Открыть адрес ip в браузере и любоваться
+ Открыть адрес ip в браузере и любоваться с портом! http://90.156.27?.??:3003/
 
  Не забыть остановить сервер после работы.

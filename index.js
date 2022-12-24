@@ -13,6 +13,7 @@ require('dotenv').config();
 
 const express = require('express');
 const fs = require('node:fs/promises');
+const sqlDB = require('./database.js');
 const app = express();
 
 async function saveDB() {
@@ -52,15 +53,43 @@ app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded());
 
 app.get('/users', (req, res) => {
+    const sql = 'SELECT * FROM user';
+    sqlDB.all(sql, [], (err, rows) => {
+        if (err) {
+            res.status(500).json({"error":err.toString()});
+        } else {
+            res.status(200).json({"rows":rows});
+        }
+    })
     res.status(200).json(db.users);
 });
 
 app.post('/users', async (req, res) => {
-    const userData = req.body;
+    const data = req.body;
+    const errors=[]
+    if (!data.name){
+        errors.push("No name specified");
+    }
+    if (!data.password){
+        errors.push("No password specified");
+    }
+    if (!data.email){
+        errors.push("No email specified");
+    }
+    if (errors.length){
+        res.status(400).json({"error":errors.join(",")});
+        return;
+    }
+    const sql ='INSERT INTO user (name, surname, email, password) VALUES (?,?,?,?)'
     console.log(userData);
-    db.users.push({ id: db.users.length , ...userData });
-    saveDB();
-    res.status(200).json(db.users);
+    sqlDB.run(sql, [data.name, data.surname, data.email, data.password], (err) => {
+        if (err) {
+            console.log('INSERT error:', err);
+            res.status(500).json({"error":err.toString()});
+        } else {
+            res.status(200).json({ "ok": true });
+        }
+    })
 });
 
 app.get('/users/:id', (req, res) => {
