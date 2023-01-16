@@ -1,35 +1,29 @@
-import { Earth, Mars, Moon, Position, Sun} from '/src/solar-system.js'
+import { createApp } from 'vue';
+// import PocketBase, { BaseAuthStore } from 'pocketbase';
+import { provideApolloClient } from '@vue/apollo-composable';
+import './style.css';
+import apolloClient from './graphql/apollo';
+import Routes from './consts/Routes';
+import router from './router';
+import App from './App.vue';
 
-const canvas = document.createElement('canvas');
+// const pb = new PocketBase(import.meta.env.VITE_DATABASE_URL);
+// pb.authStore.clear();
+// const checkUserAuthenticated = (): boolean => pb.authStore.isValid;
+// console.log('> pb.authStore.isValid:', pb.authStore.isValid);
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// router.beforeEach((to, from, next) => {
+//   const authRoutes = [Routes.INDEX, Routes.LOGIN, Routes.REGISTER];
+//   const indexOfAuthRoute = authRoutes.indexOf(to.path);
+//   if (indexOfAuthRoute < 0 && !checkUserAuthenticated()) {
+//     next({ path: Routes.LOGIN });
+//   } else next();
+// });
 
-canvas.style.backgroundColor = '#f1f1f1';
+const app = createApp(App);
 
-document.getElementById('app').append(canvas);
+provideApolloClient(apolloClient);
 
-const ctx = canvas.getContext('2d');
-
-const sun = new Sun(new Position(canvas.width / 2, canvas.height / 2));
-const earth = new Earth(sun.position, sun.size + 100);
-const mars = new Mars(sun.position, sun.size + 150);
-const moon = new Moon(earth.position, earth.size + 40);
-
-const planets = [sun, earth, mars, moon];
-
-window.requestAnimationFrame(renderPlanets);
-
-function renderPlanets() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  planets.forEach((item) => {
-    if (!(item instanceof Sun)) {
-      item.rotate();
-    }
-    //item.rotate?.call(item);   <--- синтаксис
-    item.render(ctx);
-  });
-
-  window.requestAnimationFrame(renderPlanets);
-}
+app.use(router);
+// app.provide('pb', pb);
+app.mount('#app');
