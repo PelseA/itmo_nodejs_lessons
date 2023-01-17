@@ -1,0 +1,17 @@
+Установку eslint для vue 3 смотреть документацию.
+
+После установки можно настраивать поведение eslint.
+Типы ошибок настраивать в rules, пример
+rules: {
+'no-unused-vars': 'warn',
+}
+Чтобы информация по ошибкам и предупреждениям писалась в консоль:
+в файле package.json в блоке scripts:
+{
+"eslint": "eslint --ext .js,.vue,.ts src",
+}
+Для typescript смотреть документацию
+(использовано
+npm i eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser @vue/eslint-config-typescript eslint-config-prettier eslint-plugin-prettier eslint-plugin-vue vue-eslint-parser -D)
+
+Нужно добавить файл .eslintignore чтобы он не проверял файлы /node_modules, /dist/

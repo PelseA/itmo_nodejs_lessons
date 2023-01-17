@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { useLazyQuery } from '@vue/apollo-composable'
 import UploadBooks from "../components/UploadBooks.vue";
 import gql from 'graphql-tag';

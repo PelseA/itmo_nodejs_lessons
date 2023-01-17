@@ -3,6 +3,7 @@ import { createApp } from 'vue';
 import { provideApolloClient } from "@vue/apollo-composable";
 import './style.css';
 import Routes from './consts/Routes';
+import apolloClient from './graphql/apollo.js';
 import router from './router';
 import App from './App.vue';
 
