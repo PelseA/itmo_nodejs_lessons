@@ -37,6 +37,8 @@
   "prettier": {
     "singleQuote": true,
     "trailingComma": "all",
-    "endOfLine": "crlf"
+    "endOfLine": "crlf",
+    "useTabs": false,
+    "tabWidth": 2
   }
 }
