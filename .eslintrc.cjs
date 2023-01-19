@@ -7,13 +7,17 @@ module.exports = {
         'eslint:recommended',
         'plugin:vue/vue3-recommended',
         '@vue/typescript/recommended',
-        'prettier',
+        //'prettier', //отключаем prettier если подключен eslint
         // 'plugin:vue/recommended' // Use this if you are using Vue.js 2.x.
     ],
+    plugins: ['@typescript-eslint','prettier'],
     rules: {
         // override/add rules settings here, such as:
-        'no-unused-vars': 'warn',
-        'vue/no-unused-vars': 'error',
-        'vue/no-multiple-template-root': 'off'
+        //'no-unused-vars': 'warn',
+        //'vue/no-unused-vars': 'error',
+        //'vue/no-multiple-template-root': 'off',
+        //'prettier/prettier': 'error',//для плагина
+        '@typescript-eslint/no-explicit-any': 0,
+        '@typescript-eslint/no-non-null-assertion': 0,
     },
 }
